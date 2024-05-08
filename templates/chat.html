@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chat</title>
+    <link rel="icon" href="{{ url_for('static', filename='logotab.png') }}" />
+    <style>
+      body {
+        background-color: rgb(255, 146, 146);
+      }
+      .center {
+        display: flex;
+      }
+      h2 {
+        justify-content: center;
+        display: flex;
+      }
+      p {
+        display: flex;
+        justify-content: center;
+      }
+      input {
+        display: flex;
+        justify-content: center;
+        background-color: pink;
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        background-color: pink;
+      }
+      input:hover {
+        background-color: blueviolet;
+      }
+      button:hover {
+        background-color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 class="center">Chat Room</h2>
+    <p class="center">Welcome, {{ username }}</p>
+    <div
+      style="
+        height: 300px;
+        overflow: auto;
+        background: rgb(173, 173, 173);
+        padding: 10px;
+      "
+    >
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    <div class="center">
+      <form action="{{ url_for('chat') }}" method="post">
+        Recipient:
+        <input class="center" type="text" name="recipient" required /><br />
+        Message:
+        <input class="center" type="text" name="message" required /><br />
+        <input class="center" type="submit" value="Send" />
+      </form>
+      <form action="{{ url_for('chat') }}" method="get">
+        <button class="center" type="submit">Refresh Messages</button>
+      </form>
+      <a class="center" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </body>
+</html>
